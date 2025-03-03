@@ -723,7 +723,13 @@
             "with respectful concern",
             "with thoughtful resistance"
         ];
-
+        // from Grok, to access stories.json
+let preGeneratedStories = {};
+fetch("./stories.json")
+  .then(response => response.json())
+  .then(data => preGeneratedStories = data)
+  .catch(() => console.log("No pre-generated stories loaded"));
+        
         // Suggestion arrays for each category
         const arcSuggestions = [
             "How does this future change the way people learn?",
@@ -938,32 +944,26 @@
         }
 
         // Generate pre-written story from a JSON library
-        function generatePrewrittenStory() {
-            // Simulate fetching from a JSON file (in production, this would be a real fetch)
-            setTimeout(() => {
-                // Generate a story based on the elements
-                const storyStart = generateStoryStart();
-                const storyMiddle = generateStoryMiddle();
-                const storyEnd = generateStoryEnd();
-                
-                const story = `
-                    <p class="mb-3">${storyStart}</p>
-                    <p class="mb-3">${storyMiddle}</p>
-                    <p>${storyEnd}</p>
-                `;
-                
-                // Show the generated story
-                document.getElementById('generatedStoryContainer').classList.remove('hidden');
-                document.getElementById('generatedStoryText').innerHTML = story;
-                
-                // Enable the next button
-                document.getElementById('nextToStep3').disabled = false;
-                
-                // Save story as final story
-                finalStory = story;
-                storySource = "pre-generated";
-            }, 1000);
-        }
+        
+            // from Grok
+           function generatePrewrittenStory() {
+  document.getElementById('generatedStoryContainer').classList.remove('hidden');
+  const key = `${selectedCards.arc}|${selectedCards.object}|${selectedCards.terrain}|${selectedCards.mood}`;
+  let story = preGeneratedStories[key];
+
+  if (!story && Object.keys(preGeneratedStories).length > 0) {
+    const keys = Object.keys(preGeneratedStories);
+    story = preGeneratedStories[keys[Math.floor(Math.random() * keys.length)]];
+  } else if (!story) {
+    story = "No pre-generated story matches your selection. Try shuffling or using AI!";
+  }
+
+  document.getElementById('generatedStoryText').innerHTML = `<p>${story}</p>`;
+  document.getElementById('nextToStep3').disabled = false;
+  finalStory = story;
+  storySource = "pre-generated";
+}
+        
 
         // Generate AI story
         function generateAIStory() {
