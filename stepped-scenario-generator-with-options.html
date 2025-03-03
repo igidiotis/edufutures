@@ -1223,28 +1223,28 @@
             document.getElementById('wordCount').textContent = `Words: ${wordCount}`;
         }
 
-        // Get suggestion for writing help
-        function getSuggestion(category) {
-            const suggestionArrays = {
-                arc: arcSuggestions,
-                object: objectSuggestions,
-                terrain: terrainSuggestions,
-                mood: moodSuggestions
-            };
-            
-            const suggestions = suggestionArrays[category];
-            const suggestion = getRandomItem(suggestions, 1)[0];
-            const suggestionText = document.getElementById('suggestionText');
-            suggestionText.textContent = `Suggestion for ${category.toUpperCase()}: ${suggestion}`;
-            suggestionText.classList.remove('hidden');
-        }
+// Get suggestion for writing help
+function getSuggestion(category) {
+    const suggestionArrays = {
+        arc: arcSuggestions,
+        object: objectSuggestions,
+        terrain: terrainSuggestions,
+        mood: moodSuggestions
+    };
+    
+    const suggestions = suggestionArrays[category];
+    const suggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
+    const suggestionText = document.getElementById('suggestionText');
+    suggestionText.textContent = `Suggestion for ${category.toUpperCase()}: ${suggestion}`;
+    suggestionText.classList.remove('hidden');
+}
 
-        // Clear suggestion
-        function clearSuggestion() {
-            const suggestionText = document.getElementById('suggestionText');
-            suggestionText.classList.add('hidden');
-            suggestionText.textContent = '';
-        }
+// Clear suggestion
+function clearSuggestion() {
+    const suggestionText = document.getElementById('suggestionText');
+    suggestionText.classList.add('hidden');
+    suggestionText.textContent = '';
+}
 
         // Open help modal
         function openHelpModal() {
