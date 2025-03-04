@@ -973,7 +973,38 @@ fetch("./stories.json")
             // Hide AI content while loading
             document.getElementById('aiContent').classList.add('hidden');
             
-            // This is a placeholder for the future API call
+            // by Grok for vercel api connection Mar 4
+            async function generateAIStory() {
+  document.getElementById('aiLoading').classList.remove('hidden');
+  document.getElementById('aiContent').classList.add('hidden');
+
+  const prompt = `In 2045, ${selectedCards.arc.toLowerCase()}, ${selectedCards.object.toLowerCase()}, ${selectedCards.terrain.toLowerCase()}, with a mood of ${selectedCards.mood.toLowerCase()}. Write a short story (150-200 words).`;
+
+  try {
+    const response = await fetch("https://edu-api-nine.vercel.app/api/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt }),
+    });
+    const data = await response.json();
+    const story = data.story || "AI failed to generate a story.";
+
+    document.getElementById('aiLoading').classList.add('hidden');
+    document.getElementById('aiContent').classList.remove('hidden');
+    document.getElementById('aiScenarioText').innerHTML = `<p>${story}</p>`;
+    document.getElementById('nextToStep3').disabled = false;
+    finalStory = story;
+    storySource = "ai-generated";
+  } catch (error) {
+    console.error("AI error:", error);
+    document.getElementById('aiLoading').classList.add('hidden');
+    document.getElementById('aiContent').classList.remove('hidden');
+    document.getElementById('aiScenarioText').innerHTML = "<p>Sorry, AI generation failed. Try again or use a pre-generated story.</p>";
+    document.getElementById('nextToStep3').disabled = false;
+    finalStory = "AI generation failed.";
+    storySource = "ai-failed";
+  }
+}
             // In a real implementation, this would call your Vercel API
             setTimeout(() => {
                 // Hide loading indicator
