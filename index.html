@@ -884,9 +884,28 @@
     document.getElementById('userStory').addEventListener('input', updateCounts);
   }
 
-  async function generatePrewrittenStory() {
-    document.getElementById('generatedStoryContainer').classList.remove('hidden');
-    const key = `${selectedCards.arc}|${selectedCards.object}|${selectedCards.terrain}|${selectedCards.mood}`;
+// Update the generatePrewrittenStory function
+async function generatePrewrittenStory() {
+  document.getElementById('generatedStoryContainer').classList.remove('hidden');
+  const loadingIndicator = document.createElement('div');
+  loadingIndicator.innerHTML = `
+    <div class="w-12 h-12 border-4 border-gray-200 border-t-green-500 rounded-full animate-spin mx-auto mb-4"></div>
+    <p class="text-gray-600 text-center">Loading stories...</p>
+  `;
+  document.getElementById('generatedStoryText').innerHTML = '';
+  document.getElementById('generatedStoryText').appendChild(loadingIndicator);
+  
+  const key = `${selectedCards.arc}|${selectedCards.object}|${selectedCards.terrain}|${selectedCards.mood}`;
+  
+  try {
+    const response = await fetch("/api/stories");
+    if (!response.ok) {
+      throw new Error(`Failed to fetch stories: ${response.status}`);
+    }
+    
+    const preGeneratedStories = await response.json();
+    console.log("Loaded stories:", Object.keys(preGeneratedStories).length);
+    
     let story = preGeneratedStories[key];
 
     console.log("Generated key:", key);
@@ -904,41 +923,61 @@
     document.getElementById('nextToStep3').disabled = false;
     finalStory = story;
     storySource = "pre-generated";
+  } catch (error) {
+    console.error("Error fetching stories:", error);
+    document.getElementById('generatedStoryText').innerHTML = `
+      <div class="bg-red-50 text-red-700 p-4 rounded-lg">
+        <p>Error loading stories: ${error.message}</p>
+        <p class="mt-2">Try again or use a different method to create your story.</p>
+      </div>
+    `;
   }
+}
 
-  async function generateAIStory() {
-    document.getElementById('aiLoading').classList.remove('hidden');
-    document.getElementById('aiContent').classList.add('hidden');
+// Update the generateAIStory function
+async function generateAIStory() {
+  document.getElementById('aiLoading').classList.remove('hidden');
+  document.getElementById('aiContent').classList.add('hidden');
 
-    const prompt = `In 2045, ${selectedCards.arc.toLowerCase()}, ${selectedCards.object.toLowerCase()}, ${selectedCards.terrain.toLowerCase()}, with a mood of ${selectedCards.mood.toLowerCase()}. Write a short story (150-200 words).`;
+  const prompt = `In 2045, ${selectedCards.arc.toLowerCase()}, ${selectedCards.object.toLowerCase()}, ${selectedCards.terrain.toLowerCase()}, with a mood of ${selectedCards.mood.toLowerCase()}. Write a short story (150-200 words).`;
 
-    try {
-      const response = await fetch("/api/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt }),
-      });
-      if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-      const data = await response.json();
-      const story = data.story || "AI failed to generate a story.";
-
-      console.log("AI story:", story);
-      document.getElementById('aiLoading').classList.add('hidden');
-      document.getElementById('aiContent').classList.remove('hidden');
-      document.getElementById('aiScenarioText').innerHTML = `<p>${story}</p>`;
-      document.getElementById('nextToStep3').disabled = false;
-      finalStory = story;
-      storySource = "ai-generated";
-    } catch (error) {
-      console.error("AI error:", error);
-      document.getElementById('aiLoading').classList.add('hidden');
-      document.getElementById('aiContent').classList.remove('hidden');
-      document.getElementById('aiScenarioText').innerHTML = `<p>Sorry, AI generation failed: ${error.message}. Try again or use a pre-generated story.</p>`;
-      document.getElementById('nextToStep3').disabled = false;
-      finalStory = "AI generation failed.";
-      storySource = "ai-failed";
+  try {
+    const response = await fetch("/api/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt }),
+    });
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("AI error:", errorData);
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
+    
+    const data = await response.json();
+    const story = data.story || "AI failed to generate a story.";
+
+    console.log("AI story:", story);
+    document.getElementById('aiLoading').classList.add('hidden');
+    document.getElementById('aiContent').classList.remove('hidden');
+    document.getElementById('aiScenarioText').innerHTML = `<p>${story}</p>`;
+    document.getElementById('nextToStep3').disabled = false;
+    finalStory = story;
+    storySource = "ai-generated";
+  } catch (error) {
+    console.error("AI error:", error);
+    document.getElementById('aiLoading').classList.add('hidden');
+    document.getElementById('aiContent').classList.remove('hidden');
+    document.getElementById('aiScenarioText').innerHTML = `
+      <div class="bg-red-50 text-red-700 p-4 rounded-lg">
+        <p>Sorry, AI generation failed: ${error.message}</p>
+        <p class="mt-2">This could be due to API limits or configuration issues.</p>
+        <p>Try again or use a pre-generated story instead.</p>
+      </div>
+    `;
+    document.getElementById('nextToStep3').disabled = true;
   }
+}
 
   function goToStep(step) {
     document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
