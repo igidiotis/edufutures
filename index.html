@@ -1005,37 +1005,7 @@ fetch("./stories.json")
     storySource = "ai-failed";
   }
 }
-            // In a real implementation, this would call your Vercel API
-            setTimeout(() => {
-                // Hide loading indicator
-                document.getElementById('aiLoading').classList.add('hidden');
-                
-                // Show AI content
-                document.getElementById('aiContent').classList.remove('hidden');
-                
-                // Set placeholder content (this would be replaced by the actual API response)
-                const aiScenarioText = document.getElementById('aiScenarioText');
-                
-                const storyStart = generateStoryStart();
-                const storyMiddle = generateStoryMiddle();
-                const storyEnd = generateStoryEnd();
-                
-                const story = `
-                    <p class="mb-3">${storyStart}</p>
-                    <p class="mb-3">${storyMiddle}</p>
-                    <p>${storyEnd}</p>
-                `;
-                
-                aiScenarioText.innerHTML = story;
-                
-                // Enable next button
-                document.getElementById('nextToStep3').disabled = false;
-                
-                // Save story as final story
-                finalStory = story;
-                storySource = "ai-generated";
-            }, 2000); // Simulate API delay
-        }
+            
 
         // Navigate to a specific step
         function goToStep(step) {
