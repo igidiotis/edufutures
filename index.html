@@ -659,717 +659,495 @@
     </div>
 
     <script>
-        // Card content data
-        const arcs = [
-            "In a future where AI tutors enhance 80% of human teaching",
-            "In a future where global learning networks connect every village",
-            "In a future where brain-computer interfaces accelerate learning",
-            "In a future where education is free and universally accessible",
-            "In a future where lifelong learning is the educational standard",
-            "In a future where tech failures have disrupted digital education",
-            "In a future where learning gaps have created knowledge tribes",
-            "In a future where attention disorders affect 70% of students",
-            "In a future where schools struggle with constant power outages",
-            "In a future where education access depends on data wealth",
-            "In a future where learning happens through shared dreaming",
-            "In a future where education adapts to planetary migration",
-            "In a future where skills are traded like currencies",
-            "In a future where learning is embedded in daily survival",
-            "In a future where human and AI consciousness co-evolve"
-        ];
+  // Card content data
+  const arcs = [
+    "In a future where AI tutors enhance 80% of human teaching",
+    "In a future where global learning networks connect every village",
+    "In a future where brain-computer interfaces accelerate learning",
+    "In a future where education is free and universally accessible",
+    "In a future where lifelong learning is the educational standard",
+    "In a future where tech failures have disrupted digital education",
+    "In a future where learning gaps have created knowledge tribes",
+    "In a future where attention disorders affect 70% of students",
+    "In a future where schools struggle with constant power outages",
+    "In a future where education access depends on data wealth",
+    "In a future where learning happens through shared dreaming",
+    "In a future where education adapts to planetary migration",
+    "In a future where skills are traded like currencies",
+    "In a future where learning is embedded in daily survival",
+    "In a future where human and AI consciousness co-evolve"
+  ];
 
-        const objects = [
-            "there exists an AI that reads facial expressions",
-            "there exists a neural headband that transfers language skills in hours",
-            "there exists a hologram teacher who can split into 30 versions of itself",
-            "there exists an algorithm that predicts optimal learning pathways",
-            "there exists a VR system that recreates any historical moment",
-            "there exists an AI that provides feedback in a student's learning style",
-            "there exists a network where 10,000 minds solve problems together",
-            "there exists a tool that adjusts content difficulty in real-time",
-            "there exists an AI matchmaker connecting learners across cultures",
-            "there exists a system that identifies knowledge gaps before they form",
-            "there exists an AR classroom that adapts to each student's needs",
-            "there exists a simulator that generates real-world projects",
-            "there exists an AI that matches peer tutors with 99% accuracy",
-            "there exists a device that visualizes thinking patterns"
-        ];
+  const objects = [
+    "there exists an AI that reads facial expressions",
+    "there exists a neural headband that transfers language skills in hours",
+    "there exists a hologram teacher who can split into 30 versions of itself",
+    "there exists an algorithm that predicts optimal learning pathways",
+    "there exists a VR system that recreates any historical moment",
+    "there exists an AI that provides feedback in a student's learning style",
+    "there exists a network where 10,000 minds solve problems together",
+    "there exists a tool that adjusts content difficulty in real-time",
+    "there exists an AI matchmaker connecting learners across cultures",
+    "there exists a system that identifies knowledge gaps before they form",
+    "there exists an AR classroom that adapts to each student's needs",
+    "there exists a simulator that generates real-world projects",
+    "there exists an AI that matches peer tutors with 99% accuracy",
+    "there exists a device that visualizes thinking patterns"
+  ];
 
-        const terrains = [
-            "in a context where DNA analysis predicts optimal learning paths",
-            "in a context where learning groups are formed based on skill level",
-            "in a context where city infrastructure doubles as learning spaces",
-            "in a context where students grade each other using AI frameworks",
-            "in a context where AI tutors provide 24/7 personalized support",
-            "in a context where textbooks update themselves daily",
-            "in a context where neighborhood learning hubs replace schools",
-            "in a context where mistakes earn achievement badges",
-            "in a context where learning happens across physical and digital realms",
-            "in a context where devices reshape to match learning styles",
-            "in a context where social interactions earn learning credits"
-        ];
+  const terrains = [
+    "in a context where DNA analysis predicts optimal learning paths",
+    "in a context where learning groups are formed based on skill level",
+    "in a context where city infrastructure doubles as learning spaces",
+    "in a context where students grade each other using AI frameworks",
+    "in a context where AI tutors provide 24/7 personalized support",
+    "in a context where textbooks update themselves daily",
+    "in a context where neighborhood learning hubs replace schools",
+    "in a context where mistakes earn achievement badges",
+    "in a context where learning happens across physical and digital realms",
+    "in a context where devices reshape to match learning styles",
+    "in a context where social interactions earn learning credits"
+  ];
 
-        const moods = [
-            "with wonder and curiosity",
-            "with collaborative excitement",
-            "with playful confidence",
-            "with quiet determination",
-            "with creative energy",
-            "with gentle optimism",
-            "with cautious hope",
-            "with reflective patience",
-            "with balanced acceptance",
-            "with mindful hesitation",
-            "with respectful concern",
-            "with thoughtful resistance"
-        ];
-        // from Grok, to access stories.json
-let preGeneratedStories = {};
-fetch("./stories.json")
-  .then(response => response.json())
-  .then(data => preGeneratedStories = data)
-  .catch(() => console.log("No pre-generated stories loaded"));
-        
-        // Suggestion arrays for each category
-        const arcSuggestions = [
-            "How does this future change the way people learn?",
-            "What challenges might educators face in this future?",
-            "How could this future impact social equality in education?",
-            "What new opportunities does this future create for students?",
-            "How might this future affect the role of human teachers?"
-        ];
-        const objectSuggestions = [
-            "How do people interact with this object daily?",
-            "What problems does this object solve in education?",
-            "What new challenges might this object introduce?",
-            "How does this object change the learning experience?",
-            "Who benefits most from using this object?"
-        ];
-        const terrainSuggestions = [
-            "How does this context influence student behavior?",
-            "What advantages does this context offer for learning?",
-            "How might this context limit educational access?",
-            "How do people adapt to this context in daily life?",
-            "What technologies are essential in this context?"
-        ];
-        const moodSuggestions = [
-            "How can you reflect this mood in your characters' actions?",
-            "What elements of the scenario contribute to this mood?",
-            "How does this mood affect the perception of the future?",
-            "How might this mood influence educational outcomes?",
-            "What conflicts could arise due to this mood?"
-        ];
+  const moods = [
+    "with wonder and curiosity",
+    "with collaborative excitement",
+    "with playful confidence",
+    "with quiet determination",
+    "with creative energy",
+    "with gentle optimism",
+    "with cautious hope",
+    "with reflective patience",
+    "with balanced acceptance",
+    "with mindful hesitation",
+    "with respectful concern",
+    "with thoughtful resistance"
+  ];
 
-        // Track the selected cards
-        let selectedCards = {
-            arc: null,
-            object: null,
-            terrain: null,
-            mood: null
-        };
+  // Load pre-generated stories
+  let preGeneratedStories = {};
+  fetch("/stories.json")
+    .then(response => {
+      if (!response.ok) throw new Error("Stories JSON not found");
+      return response.json();
+    })
+    .then(data => {
+      preGeneratedStories = data;
+      console.log("Loaded stories:", Object.keys(preGeneratedStories).length);
+    })
+    .catch(error => console.error("Failed to load stories.json:", error));
 
-        // Track steps and story choices
-        let currentStep = 1;
-        let storyGenerated = false;
-        let selectedStoryOption = null;
-        let finalStory = "";
-        let storySource = "";
+  // Suggestion arrays for each category
+  const arcSuggestions = [
+    "How does this future change the way people learn?",
+    "What challenges might educators face in this future?",
+    "How could this future impact social equality in education?",
+    "What new opportunities does this future create for students?",
+    "How might this future affect the role of human teachers?"
+  ];
+  const objectSuggestions = [
+    "How do people interact with this object daily?",
+    "What problems does this object solve in education?",
+    "What new challenges might this object introduce?",
+    "How does this object change the learning experience?",
+    "Who benefits most from using this object?"
+  ];
+  const terrainSuggestions = [
+    "How does this context influence student behavior?",
+    "What advantages does this context offer for learning?",
+    "How might this context limit educational access?",
+    "How do people adapt to this context in daily life?",
+    "What technologies are essential in this context?"
+  ];
+  const moodSuggestions = [
+    "How can you reflect this mood in your characters' actions?",
+    "What elements of the scenario contribute to this mood?",
+    "How does this mood affect the perception of the future?",
+    "How might this mood influence educational outcomes?",
+    "What conflicts could arise due to this mood?"
+  ];
 
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeCards();
-            setupDragAndDrop();
-            setupNavigationButtons();
-            setupShuffleButtons();
-            setupStoryOptions();
-            setupWritingHelpers();
-        });
+  // Track the selected cards
+  let selectedCards = { arc: null, object: null, terrain: null, mood: null };
 
-        // Generate initial cards for each collection
-        function initializeCards() {
-            generateCardsForCollection('arcCollection', arcs, 'arc');
-            generateCardsForCollection('objectCollection', objects, 'object');
-            generateCardsForCollection('terrainCollection', terrains, 'terrain');
-            generateCardsForCollection('moodCollection', moods, 'mood');
-        }
+  // Track steps and story choices
+  let currentStep = 1;
+  let storyGenerated = false;
+  let selectedStoryOption = null;
+  let finalStory = "";
+  let storySource = "";
 
-        // Generate cards for a specific collection
-        function generateCardsForCollection(collectionId, items, cardType) {
-            const collection = document.getElementById(collectionId);
-            collection.innerHTML = ''; // Clear existing cards
-            
-            // Take 2 random items from the array
-            const selectedItems = getRandomItems(items, 2);
-            
-            selectedItems.forEach(item => {
-                const card = document.createElement('div');
-                card.className = `draggable p-3 rounded-lg ${cardType}-card shadow-sm`;
-                card.draggable = true;
-                card.dataset.type = cardType;
-                card.dataset.content = item;
-                
-                card.innerHTML = `<p class="text-sm font-medium">${item}</p>`;
-                
-                collection.appendChild(card);
-            });
-        }
+  // Initialize the page
+  document.addEventListener('DOMContentLoaded', function() {
+    initializeCards();
+    setupDragAndDrop();
+    setupNavigationButtons();
+    setupShuffleButtons();
+    setupStoryOptions();
+    setupWritingHelpers();
+  });
 
-        // Set up shuffle buttons
-        function setupShuffleButtons() {
-            document.querySelectorAll('.shuffle-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const cardType = this.dataset.type;
-                    const shuffleIcon = this.querySelector('svg');
-                    
-                    // Add spin animation
-                    shuffleIcon.classList.add('spin-animation');
-                    
-                    // After animation, remove the class
-                    setTimeout(() => {
-                        shuffleIcon.classList.remove('spin-animation');
-                    }, 1000);
-                    
-                    // Generate new cards for this type
-                    shuffleCards(cardType);
-                });
-            });
-        }
-
-        // Shuffle cards for a specific type
-        function shuffleCards(cardType) {
-            const collections = {
-                'arc': { id: 'arcCollection', items: arcs },
-                'object': { id: 'objectCollection', items: objects },
-                'terrain': { id: 'terrainCollection', items: terrains },
-                'mood': { id: 'moodCollection', items: moods }
-            };
-            
-            if (collections[cardType]) {
-                generateCardsForCollection(
-                    collections[cardType].id,
-                    collections[cardType].items,
-                    cardType
-                );
-            }
-        }
-
-        // Set up navigation buttons
-        function setupNavigationButtons() {
-            // Step 1 to Step 2
-            document.getElementById('nextToStep2').addEventListener('click', function() {
-                goToStep(2);
-                updateElementsList();
-            });
-            
-            // Step 2 to Step 1
-            document.getElementById('backToStep1').addEventListener('click', function() {
-                goToStep(1);
-            });
-            
-            // Step 2 to Step 3
-            document.getElementById('nextToStep3').addEventListener('click', function() {
-                goToStep(3);
-                
-                // Copy scenario summary to Step 3
-                document.getElementById('scenarioSummary').innerHTML = finalStory;
-                
-                // Enable submit button only when all questions have answers
-                checkQuizCompletion();
-            });
-            
-            // Step 3 to Step 2
-            document.getElementById('backToStep2').addEventListener('click', function() {
-                goToStep(2);
-            });
-            
-            // Submit button
-            document.getElementById('submitToTally').addEventListener('click', submitToTallyForm);
-            
-            // Quiz validation
-            document.querySelectorAll('#q1, #q2, #q3, #q4').forEach(element => {
-                element.addEventListener('change', checkQuizCompletion);
-                element.addEventListener('keyup', checkQuizCompletion);
-            });
-        }
-
-        // Setup story option selection
-        function setupStoryOptions() {
-            // Option cards
-            const optionCards = document.querySelectorAll('.option-card');
-            optionCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    // Remove selected class from all cards
-                    optionCards.forEach(c => c.classList.remove('selected'));
-                    
-                    // Add selected class to clicked card
-                    this.classList.add('selected');
-                    
-                    // Hide all option content areas
-                    document.querySelectorAll('.option-content').forEach(content => {
-                        content.classList.add('hidden');
-                    });
-                    
-                    // Show selected option content
-                    const optionId = this.id;
-                    selectedStoryOption = optionId.replace('option-', '');
-                    document.getElementById(`${selectedStoryOption}-content`).classList.remove('hidden');
-                    
-                    // Enable/disable next button based on selection
-                    document.getElementById('nextToStep3').disabled = true;
-                });
-            });
-            
-            // Generate story button (pre-generated JSON)
-            document.getElementById('generateStoryBtn').addEventListener('click', generatePrewrittenStory);
-            
-            // AI Generate button
-            document.getElementById('aiGenerateBtn').addEventListener('click', generateAIStory);
-            
-            // User story textarea
-            document.getElementById('userStory').addEventListener('input', function() {
-                updateCounts();
-                // Enable next button if there's content
-                document.getElementById('nextToStep3').disabled = this.value.trim().length === 0;
-                
-                // Save the story as final story
-                finalStory = this.value;
-                storySource = "user-written";
-            });
-        }
-
-        // Set up writing helpers (suggestions, character count, etc.)
-        function setupWritingHelpers() {
-            // Character and word count
-            document.getElementById('userStory').addEventListener('input', updateCounts);
-        }
-
-        // Generate pre-written story from a JSON library
-        
-            // from Grok
-           function generatePrewrittenStory() {
-  document.getElementById('generatedStoryContainer').classList.remove('hidden');
-  const key = `${selectedCards.arc}|${selectedCards.object}|${selectedCards.terrain}|${selectedCards.mood}`;
-  let story = preGeneratedStories[key];
-
-  if (!story && Object.keys(preGeneratedStories).length > 0) {
-    const keys = Object.keys(preGeneratedStories);
-    story = preGeneratedStories[keys[Math.floor(Math.random() * keys.length)]];
-  } else if (!story) {
-    story = "No pre-generated story matches your selection. Try shuffling or using AI!";
+  // Generate initial cards for each collection
+  function initializeCards() {
+    generateCardsForCollection('arcCollection', arcs, 'arc');
+    generateCardsForCollection('objectCollection', objects, 'object');
+    generateCardsForCollection('terrainCollection', terrains, 'terrain');
+    generateCardsForCollection('moodCollection', moods, 'mood');
   }
 
-  document.getElementById('generatedStoryText').innerHTML = `<p>${story}</p>`;
-  document.getElementById('nextToStep3').disabled = false;
-  finalStory = story;
-  storySource = "pre-generated";
-}
-        
-
-        // Generate AI story
-        function generateAIStory() {
-            // Show AI loading indicator
-            document.getElementById('aiLoading').classList.remove('hidden');
-            
-            // Hide AI content while loading
-            document.getElementById('aiContent').classList.add('hidden');
-            
-            // by Grok for vercel api connection Mar 4
-            async function generateAIStory() {
-  document.getElementById('aiLoading').classList.remove('hidden');
-  document.getElementById('aiContent').classList.add('hidden');
-
-  const prompt = `In 2045, ${selectedCards.arc.toLowerCase()}, ${selectedCards.object.toLowerCase()}, ${selectedCards.terrain.toLowerCase()}, with a mood of ${selectedCards.mood.toLowerCase()}. Write a short story (150-200 words).`;
-
-  try {
-    const response = await fetch("https://edu-api-nine.vercel.app/api/generate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt }),
+  function generateCardsForCollection(collectionId, items, cardType) {
+    const collection = document.getElementById(collectionId);
+    collection.innerHTML = '';
+    const selectedItems = getRandomItems(items, 2);
+    selectedItems.forEach(item => {
+      const card = document.createElement('div');
+      card.className = `draggable p-3 rounded-lg ${cardType}-card shadow-sm`;
+      card.draggable = true;
+      card.dataset.type = cardType;
+      card.dataset.content = item;
+      card.innerHTML = `<p class="text-sm font-medium">${item}</p>`;
+      collection.appendChild(card);
     });
-    const data = await response.json();
-    const story = data.story || "AI failed to generate a story.";
+  }
 
-    document.getElementById('aiLoading').classList.add('hidden');
-    document.getElementById('aiContent').classList.remove('hidden');
-    document.getElementById('aiScenarioText').innerHTML = `<p>${story}</p>`;
+  function setupShuffleButtons() {
+    document.querySelectorAll('.shuffle-btn').forEach(button => {
+      button.addEventListener('click', function() {
+        const cardType = this.dataset.type;
+        const shuffleIcon = this.querySelector('svg');
+        shuffleIcon.classList.add('spin-animation');
+        setTimeout(() => shuffleIcon.classList.remove('spin-animation'), 1000);
+        shuffleCards(cardType);
+      });
+    });
+  }
+
+  function shuffleCards(cardType) {
+    const collections = {
+      'arc': { id: 'arcCollection', items: arcs },
+      'object': { id: 'objectCollection', items: objects },
+      'terrain': { id: 'terrainCollection', items: terrains },
+      'mood': { id: 'moodCollection', items: moods }
+    };
+    if (collections[cardType]) {
+      generateCardsForCollection(collections[cardType].id, collections[cardType].items, cardType);
+    }
+  }
+
+  function setupNavigationButtons() {
+    document.getElementById('nextToStep2').addEventListener('click', function() {
+      goToStep(2);
+      updateElementsList();
+    });
+    document.getElementById('backToStep1').addEventListener('click', function() {
+      goToStep(1);
+    });
+    document.getElementById('nextToStep3').addEventListener('click', function() {
+      goToStep(3);
+      document.getElementById('scenarioSummary').innerText = finalStory.replace(/<\/?[^>]+(>|$)/g, "");
+      checkQuizCompletion();
+    });
+    document.getElementById('backToStep2').addEventListener('click', function() {
+      goToStep(2);
+    });
+    document.getElementById('submitToTally').addEventListener('click', submitToTallyForm);
+    document.querySelectorAll('#q1, #q2, #q3, #q4').forEach(element => {
+      element.addEventListener('change', checkQuizCompletion);
+      element.addEventListener('keyup', checkQuizCompletion);
+    });
+  }
+
+  function setupStoryOptions() {
+    const optionCards = document.querySelectorAll('.option-card');
+    optionCards.forEach(card => {
+      card.addEventListener('click', function() {
+        optionCards.forEach(c => c.classList.remove('selected'));
+        this.classList.add('selected');
+        document.querySelectorAll('.option-content').forEach(content => content.classList.add('hidden'));
+        const optionId = this.id;
+        selectedStoryOption = optionId.replace('option-', '');
+        document.getElementById(`${selectedStoryOption}-content`).classList.remove('hidden');
+        document.getElementById('nextToStep3').disabled = true;
+      });
+    });
+    document.getElementById('generateStoryBtn').addEventListener('click', generatePrewrittenStory);
+    document.getElementById('aiGenerateBtn').addEventListener('click', generateAIStory);
+    document.getElementById('userStory').addEventListener('input', function() {
+      updateCounts();
+      document.getElementById('nextToStep3').disabled = this.value.trim().length === 0;
+      finalStory = this.value;
+      storySource = "user-written";
+    });
+  }
+
+  function setupWritingHelpers() {
+    document.getElementById('userStory').addEventListener('input', updateCounts);
+  }
+
+  async function generatePrewrittenStory() {
+    document.getElementById('generatedStoryContainer').classList.remove('hidden');
+    const key = `${selectedCards.arc}|${selectedCards.object}|${selectedCards.terrain}|${selectedCards.mood}`;
+    let story = preGeneratedStories[key];
+
+    console.log("Generated key:", key);
+    console.log("Story found:", story);
+
+    if (!story && Object.keys(preGeneratedStories).length > 0) {
+      const keys = Object.keys(preGeneratedStories);
+      story = preGeneratedStories[keys[Math.floor(Math.random() * keys.length)]];
+      story += " <em>(Note: Random story selected—no exact match found)</em>";
+    } else if (!story) {
+      story = "No pre-generated story matches your selection. Try shuffling or using AI!";
+    }
+
+    document.getElementById('generatedStoryText').innerHTML = `<p>${story}</p>`;
     document.getElementById('nextToStep3').disabled = false;
     finalStory = story;
-    storySource = "ai-generated";
-  } catch (error) {
-    console.error("AI error:", error);
-    document.getElementById('aiLoading').classList.add('hidden');
-    document.getElementById('aiContent').classList.remove('hidden');
-    document.getElementById('aiScenarioText').innerHTML = "<p>Sorry, AI generation failed. Try again or use a pre-generated story.</p>";
-    document.getElementById('nextToStep3').disabled = false;
-    finalStory = "AI generation failed.";
-    storySource = "ai-failed";
+    storySource = "pre-generated";
   }
-}
-            
 
-        // Navigate to a specific step
-        function goToStep(step) {
-            // Hide all steps
-            document.querySelectorAll('.step-content').forEach(el => {
-                el.classList.remove('active');
-            });
-            
-            // Show the target step
-            document.getElementById(`step${step}`).classList.add('active');
-            
-            // Update step indicators
-            updateStepIndicators(step);
-            
-            // Update current step
-            currentStep = step;
+  async function generateAIStory() {
+    document.getElementById('aiLoading').classList.remove('hidden');
+    document.getElementById('aiContent').classList.add('hidden');
+
+    const prompt = `In 2045, ${selectedCards.arc.toLowerCase()}, ${selectedCards.object.toLowerCase()}, ${selectedCards.terrain.toLowerCase()}, with a mood of ${selectedCards.mood.toLowerCase()}. Write a short story (150-200 words).`;
+
+    try {
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt }),
+      });
+      if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+      const data = await response.json();
+      const story = data.story || "AI failed to generate a story.";
+
+      console.log("AI story:", story);
+      document.getElementById('aiLoading').classList.add('hidden');
+      document.getElementById('aiContent').classList.remove('hidden');
+      document.getElementById('aiScenarioText').innerHTML = `<p>${story}</p>`;
+      document.getElementById('nextToStep3').disabled = false;
+      finalStory = story;
+      storySource = "ai-generated";
+    } catch (error) {
+      console.error("AI error:", error);
+      document.getElementById('aiLoading').classList.add('hidden');
+      document.getElementById('aiContent').classList.remove('hidden');
+      document.getElementById('aiScenarioText').innerHTML = `<p>Sorry, AI generation failed: ${error.message}. Try again or use a pre-generated story.</p>`;
+      document.getElementById('nextToStep3').disabled = false;
+      finalStory = "AI generation failed.";
+      storySource = "ai-failed";
+    }
+  }
+
+  function goToStep(step) {
+    document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+    document.getElementById(`step${step}`).classList.add('active');
+    updateStepIndicators(step);
+    currentStep = step;
+  }
+
+  function updateStepIndicators(activeStep) {
+    const stepBubbles = document.querySelectorAll('.step-bubble');
+    const stepConnectors = document.querySelectorAll('.step-connector');
+    stepBubbles.forEach((bubble, index) => {
+      if (index + 1 < activeStep) bubble.className = 'step-bubble bg-green-500 text-white';
+      else if (index + 1 === activeStep) bubble.className = 'step-bubble bg-blue-500 text-white';
+      else bubble.className = 'step-bubble bg-gray-300 text-gray-700';
+    });
+    const stepTexts = document.querySelectorAll('.step-indicator + div > div');
+    stepTexts.forEach((text, index) => {
+      if (index + 1 < activeStep) text.className = 'w-1/3 text-center text-green-600 font-medium';
+      else if (index + 1 === activeStep) text.className = 'w-1/3 text-center text-blue-600 font-medium';
+      else text.className = 'w-1/3 text-center text-gray-600';
+    });
+    stepConnectors.forEach((connector, index) => {
+      if (index + 1 < activeStep) connector.className = 'step-connector bg-green-500 mx-2';
+      else connector.className = 'step-connector bg-gray-300 mx-2';
+    });
+  }
+
+  function getRandomItems(array, count) {
+    const shuffled = [...array].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+  }
+
+  function setupDragAndDrop() {
+    document.addEventListener('dragstart', function(e) {
+      if (e.target.classList.contains('draggable')) {
+        e.dataTransfer.setData('text/plain', e.target.dataset.content);
+        e.dataTransfer.setData('cardType', e.target.dataset.type);
+        setTimeout(() => e.target.classList.add('opacity-50'), 0);
+      }
+    });
+
+    document.addEventListener('dragend', function(e) {
+      if (e.target.classList.contains('draggable')) e.target.classList.remove('opacity-50');
+    });
+
+    document.querySelectorAll('.drop-zone').forEach(zone => {
+      zone.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        const cardType = e.dataTransfer.getData('cardType');
+        if (zone.dataset.type === cardType) this.classList.add('highlight');
+      });
+
+      zone.addEventListener('dragleave', function() {
+        this.classList.remove('highlight');
+      });
+
+      zone.addEventListener('drop', function(e) {
+        e.preventDefault();
+        this.classList.remove('highlight');
+        const cardContent = e.dataTransfer.getData('text/plain');
+        const cardType = e.dataTransfer.getData('cardType');
+        if (cardType === this.dataset.type) {
+          this.innerHTML = '';
+          const card = document.createElement('div');
+          card.className = `item-in-zone p-4 ${cardType}-card rounded-lg shadow-md`;
+          card.dataset.type = cardType;
+          card.dataset.content = cardContent;
+          card.innerHTML = `
+            <div class="flex items-center relative">
+              <div class="remove-card-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
+              <div class="w-10 h-10 ${cardType}-icon rounded-full flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <p class="text-sm font-medium">${cardContent}</p>
+            </div>
+          `;
+          card.addEventListener('click', function() { removeCard(this); });
+          this.appendChild(card);
+          selectedCards[cardType] = cardContent;
+          checkAllCardsSelected();
         }
+      });
+    });
+  }
 
-        // Update step indicators
-        function updateStepIndicators(activeStep) {
-            // Get all step bubbles and connectors
-            const stepBubbles = document.querySelectorAll('.step-bubble');
-            const stepConnectors = document.querySelectorAll('.step-connector');
-            
-            // Reset all to inactive state
-            stepBubbles.forEach((bubble, index) => {
-                if (index + 1 < activeStep) {
-                    // Completed steps
-                    bubble.className = 'step-bubble bg-green-500 text-white';
-                } else if (index + 1 === activeStep) {
-                    // Current step
-                    bubble.className = 'step-bubble bg-blue-500 text-white';
-                } else {
-                    // Future steps
-                    bubble.className = 'step-bubble bg-gray-300 text-gray-700';
-                }
-            });
-            
-            // Update step text colors
-            const stepTexts = document.querySelectorAll('.step-indicator + div > div');
-            stepTexts.forEach((text, index) => {
-                if (index + 1 < activeStep) {
-                    text.className = 'w-1/3 text-center text-green-600 font-medium';
-                } else if (index + 1 === activeStep) {
-                    text.className = 'w-1/3 text-center text-blue-600 font-medium';
-                } else {
-                    text.className = 'w-1/3 text-center text-gray-600';
-                }
-            });
-            
-            // Update connectors
-            stepConnectors.forEach((connector, index) => {
-                if (index + 1 < activeStep) {
-                    connector.className = 'step-connector bg-green-500 mx-2';
-                } else {
-                    connector.className = 'step-connector bg-gray-300 mx-2';
-                }
-            });
-        }
+  function removeCard(card) {
+    const cardType = card.dataset.type;
+    const dropZone = card.parentElement;
+    const emptyDropZone = `
+      <div class="text-center">
+        <div class="w-12 h-12 ${cardType}-icon rounded-full flex items-center justify-center mx-auto mb-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+        </div>
+        <p class="text-gray-500">Drag a ${cardType.toUpperCase()} card here</p>
+      </div>
+    `;
+    dropZone.innerHTML = emptyDropZone;
+    selectedCards[cardType] = null;
+    checkAllCardsSelected();
+  }
 
-        // Get random items from an array
-        function getRandomItems(array, count) {
-            const shuffled = [...array].sort(() => 0.5 - Math.random());
-            return shuffled.slice(0, count);
-        }
+  function checkAllCardsSelected() {
+    const allSelected = Object.values(selectedCards).every(value => value !== null);
+    document.getElementById('nextToStep2').disabled = !allSelected;
+    if (allSelected) {
+      document.getElementById('nextToStep2').classList.add('animate-pulse');
+      setTimeout(() => document.getElementById('nextToStep2').classList.remove('animate-pulse'), 1500);
+    }
+  }
 
-        // Set up drag and drop functionality
-        function setupDragAndDrop() {
-            // Make cards draggable
-            document.addEventListener('dragstart', function(e) {
-                if (e.target.classList.contains('draggable')) {
-                    e.dataTransfer.setData('text/plain', e.target.dataset.content);
-                    e.dataTransfer.setData('cardType', e.target.dataset.type);
-                    
-                    // Add visual cue for dragging
-                    setTimeout(() => {
-                        e.target.classList.add('opacity-50');
-                    }, 0);
-                }
-            });
+  function updateElementsList() {
+    const elementsList = document.getElementById('elementsList');
+    elementsList.innerHTML = '';
+    Object.entries(selectedCards).forEach(([type, content]) => {
+      if (content) {
+        const li = document.createElement('li');
+        li.className = 'mb-1';
+        li.innerHTML = `<strong>${type.toUpperCase()}:</strong> ${content}`;
+        elementsList.appendChild(li);
+      }
+    });
+  }
 
-            document.addEventListener('dragend', function(e) {
-                if (e.target.classList.contains('draggable')) {
-                    e.target.classList.remove('opacity-50');
-                }
-            });
+  function updateCounts() {
+    const text = document.getElementById('userStory').value;
+    const charCount = text.length;
+    const wordCount = text.trim().split(/\s+/).filter(word => word.length).length || 0;
+    document.getElementById('charCount').textContent = `Characters: ${charCount} / 5000`;
+    document.getElementById('wordCount').textContent = `Words: ${wordCount}`;
+  }
 
-            // Set up drop zones
-            document.querySelectorAll('.drop-zone').forEach(zone => {
-                zone.addEventListener('dragover', function(e) {
-                    e.preventDefault();
-                    const cardType = e.dataTransfer.getData('cardType') || e.dataTransfer.types.includes('text/plain') && zone.dataset.type;
-                    
-                    if (zone.dataset.type === cardType || !cardType) {
-                        this.classList.add('highlight');
-                    }
-                });
-
-                zone.addEventListener('dragleave', function() {
-                    this.classList.remove('highlight');
-                });
-
-                zone.addEventListener('drop', function(e) {
-                    e.preventDefault();
-                    this.classList.remove('highlight');
-                    
-                    const cardContent = e.dataTransfer.getData('text/plain');
-                    const cardType = e.dataTransfer.getData('cardType');
-                    
-                    if (cardType === this.dataset.type) {
-                        // Clear the drop zone
-                        this.innerHTML = '';
-                        
-                        // Create a new card in the drop zone
-                        const card = document.createElement('div');
-                        card.className = `item-in-zone p-4 ${cardType}-card rounded-lg shadow-md`;
-                        card.dataset.type = cardType;
-                        card.dataset.content = cardContent;
-                        
-                        card.innerHTML = `
-                            <div class="flex items-center relative">
-                                <div class="remove-card-btn">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </div>
-                                <div class="w-10 h-10 ${cardType}-icon rounded-full flex items-center justify-center mr-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                </div>
-                                <p class="text-sm font-medium">${cardContent}</p>
-                            </div>
-                        `;
-                        
-                        // Add click event to remove the card
-                        card.addEventListener('click', function() {
-                            removeCard(this);
-                        });
-                        
-                        this.appendChild(card);
-                        
-                        // Update selected cards
-                        selectedCards[cardType] = cardContent;
-                        
-                        // Check if all cards are selected
-                        checkAllCardsSelected();
-                    }
-                });
-            });
-        }
-
-        // Remove a card from a drop zone
-        function removeCard(card) {
-            const cardType = card.dataset.type;
-            const dropZone = card.parentElement;
-            
-            // Reset the drop zone to its original state
-            const emptyDropZone = `
-                <div class="text-center">
-                    <div class="w-12 h-12 ${cardType}-icon rounded-full flex items-center justify-center mx-auto mb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                        </svg>
-                    </div>
-                    <p class="text-gray-500">Drag a ${cardType.toUpperCase()} card here</p>
-                </div>
-            `;
-            
-            dropZone.innerHTML = emptyDropZone;
-            
-            // Update selected cards
-            selectedCards[cardType] = null;
-            
-            // Check if all cards are selected (this will disable the next button if needed)
-            checkAllCardsSelected();
-        }
-
-        // Check if all cards are selected
-        function checkAllCardsSelected() {
-            const allSelected = Object.values(selectedCards).every(value => value !== null);
-            
-            // Enable/disable next button
-            document.getElementById('nextToStep2').disabled = !allSelected;
-            
-            // If all selected, make the next button more prominent
-            if (allSelected) {
-                document.getElementById('nextToStep2').classList.add('animate-pulse');
-                setTimeout(() => {
-                    document.getElementById('nextToStep2').classList.remove('animate-pulse');
-                }, 1500);
-            }
-        }
-
-        // Update the elements list in step 2
-        function updateElementsList() {
-            const elementsList = document.getElementById('elementsList');
-            elementsList.innerHTML = '';
-            
-            Object.entries(selectedCards).forEach(([type, content]) => {
-                if (content) {
-                    const li = document.createElement('li');
-                    li.className = 'mb-1';
-                    li.innerHTML = `<strong>${type.toUpperCase()}:</strong> ${content}`;
-                    elementsList.appendChild(li);
-                }
-            });
-        }
-
-        // Update character and word counts
-        function updateCounts() {
-            const text = document.getElementById('userStory').value;
-            const charCount = text.length;
-            const wordCount = text.trim().split(/\s+/).filter(word => word.length).length || 0;
-            document.getElementById('charCount').textContent = `Characters: ${charCount} / 5000`;
-            document.getElementById('wordCount').textContent = `Words: ${wordCount}`;
-        }
-
-// Get suggestion for writing help
-function getSuggestion(category) {
+  function getSuggestion(category) {
     const suggestionArrays = {
-        arc: arcSuggestions,
-        object: objectSuggestions,
-        terrain: terrainSuggestions,
-        mood: moodSuggestions
+      arc: arcSuggestions,
+      object: objectSuggestions,
+      terrain: terrainSuggestions,
+      mood: moodSuggestions
     };
-    
     const suggestions = suggestionArrays[category];
     const suggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
     const suggestionText = document.getElementById('suggestionText');
     suggestionText.textContent = `Suggestion for ${category.toUpperCase()}: ${suggestion}`;
     suggestionText.classList.remove('hidden');
-}
+  }
 
-// Clear suggestion
-function clearSuggestion() {
+  function clearSuggestion() {
     const suggestionText = document.getElementById('suggestionText');
     suggestionText.classList.add('hidden');
     suggestionText.textContent = '';
-}
+  }
 
-        // Open help modal
-        function openHelpModal() {
-            document.getElementById('helpModal').classList.add('show');
-        }
+  function openHelpModal() {
+    document.getElementById('helpModal').classList.add('show');
+  }
 
-        // Close help modal
-        function closeHelpModal() {
-            document.getElementById('helpModal').classList.remove('show');
-        }
+  function closeHelpModal() {
+    document.getElementById('helpModal').classList.remove('show');
+  }
 
-        // Helper function to generate a random story start
-        function generateStoryStart() {
-            const starts = [
-                `In 2045, education had been transformed by ${getTypeElement('object')}. Professor Mei Zhang welcomed her students to the morning session at Singapore's Central Learning Hub, where ${getTypeElement('arc').toLowerCase()}.`,
-                
-                `The year was 2045. Liam adjusted his neural interface as he prepared for today's lesson. Since ${getTypeElement('arc').toLowerCase()}, students like him had adapted to new ways of learning.`,
-                
-                `Ava looked out over the cityscape of 2045, a world where ${getTypeElement('arc').toLowerCase()}. She activated ${getTypeElement('object').replace('there exists ', '')}, preparing for another day of learning.`
-            ];
-            
-            return starts[Math.floor(Math.random() * starts.length)];
-        }
+  function checkQuizCompletion() {
+    const q1 = document.getElementById('q1').value;
+    const q2 = document.getElementById('q2').value;
+    const q3 = document.getElementById('q3').value;
+    const q4 = document.getElementById('q4').value;
+    const allCompleted = q1 && q2 && q3 && q4;
+    document.getElementById('submitToTally').disabled = !allCompleted;
+    if (allCompleted) {
+      document.getElementById('submitToTally').classList.add('animate-pulse');
+      setTimeout(() => document.getElementById('submitToTally').classList.remove('animate-pulse'), 1500);
+    }
+  }
 
-        // Helper function to generate a random story middle
-        function generateStoryMiddle() {
-            const middles = [
-                `The classroom environment was unlike anything from decades past, as ${getTypeElement('terrain').toLowerCase()}. Students connected with each other ${getTypeElement('mood').toLowerCase()}, sharing insights across continents in real-time.`,
-                
-                `${getTypeElement('terrain')} had created unprecedented opportunities. Today's lesson flowed naturally as students engaged with the material ${getTypeElement('mood').toLowerCase()}, unrestrained by the physical limitations that had once defined education.`,
-                
-                `What made this system revolutionary was how ${getTypeElement('terrain').toLowerCase()}. The traditional boundaries between subjects had dissolved, and learners approached new challenges ${getTypeElement('mood').toLowerCase()}.`
-            ];
-            
-            return middles[Math.floor(Math.random() * middles.length)];
-        }
+  function submitToTallyForm() {
+    const q1 = document.getElementById('q1').value;
+    const q2 = document.getElementById('q2').value;
+    const q3 = document.getElementById('q3').value;
+    const q4 = document.getElementById('q4').value;
+    const baseURL = 'https://tally.so/r/3jk5vY';
+    const params = new URLSearchParams();
+    params.set('arc', selectedCards.arc || '');
+    params.set('object', selectedCards.object || '');
+    params.set('terrain', selectedCards.terrain || '');
+    params.set('mood', selectedCards.mood || '');
+    params.set('story_source', storySource);
+    const storyContent = finalStory.replace(/<\/?[^>]+(>|$)/g, "");
+    params.set('story', storyContent);
+    params.set('q1_realism', q1);
+    params.set('q2_promising', q2);
+    params.set('q3_concerns', q3);
+    params.set('q4_impact', q4);
+    window.open(`${baseURL}?${params.toString()}`, '_blank');
+  }
 
-        // Helper function to generate a random story end
-        function generateStoryEnd() {
-            const ends = [
-                `As the session concluded, everyone reflected on how different education had become. The combination of ${getTypeElement('object').replace('there exists ', '')} with an environment where ${getTypeElement('arc').toLowerCase()} had created learning experiences that previous generations could only have dreamed of.`,
-                
-                `Looking back at the educational systems of the 2020s, it seemed primitive by comparison. The integration of technology and human connection had finally reached a balance, allowing students to approach knowledge ${getTypeElement('mood').toLowerCase()} while developing the skills they truly needed.`,
-                
-                `This was the promise of future education fulfilled - not just more efficient learning, but deeper, more meaningful connections to knowledge. In this world where ${getTypeElement('arc').toLowerCase()}, students no longer just studied the world—they engaged with it directly, personally, and profoundly.`
-            ];
-            
-            return ends[Math.floor(Math.random() * ends.length)];
-        }
+  window.addEventListener('click', function(event) {
+    if (event.target.classList.contains('modal-backdrop')) event.target.classList.remove('show');
+  });
 
-        // Helper function to get the content of a specific card type
-        function getTypeElement(type) {
-            return selectedCards[type] || `[${type} element]`;
-        }
-
-        // Check if the quiz is complete
-        function checkQuizCompletion() {
-            const q1 = document.getElementById('q1').value;
-            const q2 = document.getElementById('q2').value;
-            const q3 = document.getElementById('q3').value;
-            const q4 = document.getElementById('q4').value;
-            
-            const allCompleted = q1 && q2 && q3 && q4;
-            
-            // Enable/disable submit button
-            document.getElementById('submitToTally').disabled = !allCompleted;
-            
-            if (allCompleted) {
-                document.getElementById('submitToTally').classList.add('animate-pulse');
-                setTimeout(() => {
-                    document.getElementById('submitToTally').classList.remove('animate-pulse');
-                }, 1500);
-            }
-        }
-
-        // Submit to Tally Form
-        function submitToTallyForm() {
-            // Get form values
-            const q1 = document.getElementById('q1').value;
-            const q2 = document.getElementById('q2').value;
-            const q3 = document.getElementById('q3').value;
-            const q4 = document.getElementById('q4').value;
-            
-            // Construct the Tally Form URL with parameters
-            const baseURL = 'https://tally.so/r/3jk5vY'; // Replace with your actual Tally form ID
-            
-            // Using URLSearchParams
-            const params = new URLSearchParams();
-            params.set('arc', selectedCards.arc || '');
-            params.set('object', selectedCards.object || '');
-            params.set('terrain', selectedCards.terrain || '');
-            params.set('mood', selectedCards.mood || '');
-            params.set('story_source', storySource);
-            
-            // Get the generated story content
-            const storyContent = finalStory.replace(/<\/?[^>]+(>|$)/g, ""); // Strip HTML tags
-            
-            params.set('story', storyContent);
-            
-            // Add quiz responses
-            params.set('q1_realism', q1);
-            params.set('q2_promising', q2);
-            params.set('q3_concerns', q3);
-            params.set('q4_impact', q4);
-            
-            // Open the form in a new tab
-            window.open(`${baseURL}?${params.toString()}`, '_blank');
-        }
-
-        // Close modals when clicking outside
-        window.addEventListener('click', function(event) {
-            if (event.target.classList.contains('modal-backdrop')) {
-                event.target.classList.remove('show');
-            }
-        });
-
-        // Close modals with Escape key
-        window.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                document.querySelectorAll('.modal-backdrop').forEach(modal => {
-                    modal.classList.remove('show');
-                });
-            }
-        });
-    </script>
+  window.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') document.querySelectorAll('.modal-backdrop').forEach(modal => modal.classList.remove('show'));
+  });
+</script>
 </body>
 </html>
