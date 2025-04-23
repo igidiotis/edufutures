@@ -1,3 +1,6 @@
+'use client';
+
+import React from 'react';
 import { useResearchStore } from '../store/researchStore';
 import ProgressSteps from './ProgressSteps';
 import Step1Selection from './Step1Selection';

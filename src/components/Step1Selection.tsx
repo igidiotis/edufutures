@@ -1,3 +1,6 @@
+'use client';
+
+import React from 'react';
 import { researchData } from '../data/researchData';
 import SelectionCard from './SelectionCard';
 import { useResearchStore } from '../store/researchStore';

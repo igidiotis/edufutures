@@ -1,3 +1,6 @@
+'use client';
+
+import React from 'react';
 import { useResearchStore } from '../store/researchStore';
 import { ElementType } from '../data/researchData';
 
