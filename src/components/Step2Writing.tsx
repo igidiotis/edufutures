@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useResearchStore } from '../store/researchStore';
 import { ElementType } from '../types/research';
 
@@ -12,6 +12,8 @@ export default function Step2Writing() {
     setCurrentStep, 
     generateStoryStarter 
   } = useResearchStore();
+  
+  const [showTips, setShowTips] = useState(false);
   
   // Handle going back to step 1
   const handleBack = () => {
@@ -82,7 +84,7 @@ export default function Step2Writing() {
       </div>
       
       {/* Story Text Area */}
-      <div className="mb-8">
+      <div className="mb-4">
         <label htmlFor="story" className="block text-xl font-semibold text-gray-800 mb-4">
           Your Story
         </label>
@@ -93,6 +95,72 @@ export default function Step2Writing() {
           className="w-full h-96 p-4 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
           placeholder="Start writing your story here..."
         />
+      </div>
+
+      {/* Writing Tips Section */}
+      <div className="mb-8">
+        <button
+          onClick={() => setShowTips(!showTips)}
+          className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 transition-colors duration-200"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className={`h-5 w-5 transform transition-transform duration-200 ${showTips ? 'rotate-180' : ''}`}
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clipRule="evenodd"
+            />
+          </svg>
+          <span className="font-medium">Story Writing Tips</span>
+        </button>
+        
+        <div
+          className={`mt-2 overflow-hidden transition-all duration-300 ease-in-out ${
+            showTips ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Story Writing Tips</h3>
+            <ul className="space-y-3 text-gray-700">
+              <li className="flex items-start">
+                <span className="font-medium mr-2">•</span>
+                <span><strong>Set the Scene:</strong> Begin by describing how this future looks and feels. What's different from today? What's familiar?</span>
+              </li>
+              <li className="flex items-start">
+                <span className="font-medium mr-2">•</span>
+                <span><strong>Focus on the Object:</strong> Explain how people interact with the mentioned object. What problems does it solve? What new challenges might it create?</span>
+              </li>
+              <li className="flex items-start">
+                <span className="font-medium mr-2">•</span>
+                <span><strong>Consider the Context:</strong> Think about how the TERRAIN affects the story. How does the specified context influence people's behaviors and interactions?</span>
+              </li>
+              <li className="flex items-start">
+                <span className="font-medium mr-2">•</span>
+                <span><strong>Capture the Mood:</strong> Reflect the emotional atmosphere in your writing. How do people feel about living in this future?</span>
+              </li>
+              <li className="flex items-start">
+                <span className="font-medium mr-2">•</span>
+                <span><strong>Include Characters:</strong> Consider introducing a character experiencing this future. What's their perspective on these changes?</span>
+              </li>
+              <li className="flex items-start">
+                <span className="font-medium mr-2">•</span>
+                <span><strong>Educational Impact:</strong> Think about how learning and teaching have evolved. What new possibilities or challenges exist?</span>
+              </li>
+              <li className="flex items-start">
+                <span className="font-medium mr-2">•</span>
+                <span><strong>Show, Don't Tell:</strong> Instead of just stating facts, create vivid descriptions and specific examples of how this future works.</span>
+              </li>
+              <li className="flex items-start">
+                <span className="font-medium mr-2">•</span>
+                <span><strong>Consider Consequences:</strong> What are the broader implications of this future for society, culture, and human relationships?</span>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
       
       {/* Navigation Buttons */}
