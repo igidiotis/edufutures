@@ -5,16 +5,18 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "EduFutures Research - Future of Digital Education",
+  title: {
+    template: '%s | EduFutures Research',
+    default: 'EduFutures Research - Future of Digital Education',
+  },
   description: "A research tool for exploring speculative scenarios about the future of digital education",
-  metadataBase: new URL('https://edufutures.vercel.app'),
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body className={inter.className}>{children}</body>
