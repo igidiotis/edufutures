@@ -17,6 +17,8 @@ interface ResearchState {
   aiStoryStarter: string;
   // Loading state for story generation
   isGenerating: boolean;
+  // Error message
+  error: string | null;
   
   // Actions
   selectElement: (category: string, element: ElementType) => void;
@@ -25,6 +27,7 @@ interface ResearchState {
   setAiStoryStarter: (starter: string) => void;
   generateStoryStarter: () => Promise<void>;
   resetSelections: () => void;
+  clearError: () => void;
 }
 
 export const useResearchStore = create<ResearchState>((set, get) => ({
@@ -38,6 +41,7 @@ export const useResearchStore = create<ResearchState>((set, get) => ({
   story: '',
   aiStoryStarter: '',
   isGenerating: false,
+  error: null,
   
   selectElement: (category, element) => set((state) => ({
     selectedElements: {
@@ -55,10 +59,12 @@ export const useResearchStore = create<ResearchState>((set, get) => ({
     story: starter // Also set the main story to include the starter
   }),
   
+  clearError: () => set({ error: null }),
+  
   generateStoryStarter: async () => {
     const { selectedElements } = get();
     
-    set({ isGenerating: true });
+    set({ isGenerating: true, error: null });
     
     try {
       const response = await fetch('/api/generate', {
@@ -74,20 +80,23 @@ export const useResearchStore = create<ResearchState>((set, get) => ({
         }),
       });
 
+      const data = await response.json();
+      
       if (!response.ok) {
-        throw new Error('Failed to generate story');
+        throw new Error(data.error || 'Failed to generate story');
       }
 
-      const data = await response.json();
       set({ 
         aiStoryStarter: data.text,
-        story: data.text, // Set the story text to the generated opener
+        story: data.text,
         isGenerating: false
       });
     } catch (error) {
       console.error('Error generating story:', error);
-      set({ isGenerating: false });
-      // You might want to add error handling here
+      set({ 
+        isGenerating: false,
+        error: error instanceof Error ? error.message : 'Failed to generate story'
+      });
     }
   },
   
@@ -101,6 +110,7 @@ export const useResearchStore = create<ResearchState>((set, get) => ({
     story: '',
     aiStoryStarter: '',
     currentStep: 1,
-    isGenerating: false
+    isGenerating: false,
+    error: null
   })
 })); 
