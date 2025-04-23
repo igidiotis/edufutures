@@ -5,37 +5,37 @@ export const storyElements: StoryElement[] = [
   {
     id: 'arc-1',
     title: 'Journey',
-    image: '/images/elements/arc-journey.jpg',
+    image: '',
     category: 'arc'
   },
   {
     id: 'arc-2',
     title: 'Transformation',
-    image: '/images/elements/arc-transformation.jpg',
+    image: '',
     category: 'arc'
   },
   {
     id: 'arc-3',
     title: 'Discovery',
-    image: '/images/elements/arc-discovery.jpg',
+    image: '',
     category: 'arc'
   },
   {
     id: 'arc-4',
     title: 'Conflict',
-    image: '/images/elements/arc-conflict.jpg',
+    image: '',
     category: 'arc'
   },
   {
     id: 'arc-5',
     title: 'Mystery',
-    image: '/images/elements/arc-mystery.jpg',
+    image: '',
     category: 'arc'
   },
   {
     id: 'arc-6',
     title: 'Reunion',
-    image: '/images/elements/arc-reunion.jpg',
+    image: '',
     category: 'arc'
   },
 
@@ -43,37 +43,37 @@ export const storyElements: StoryElement[] = [
   {
     id: 'object-1',
     title: 'Ancient Map',
-    image: '/images/elements/object-map.jpg',
+    image: '',
     category: 'object'
   },
   {
     id: 'object-2',
     title: 'Magic Crystal',
-    image: '/images/elements/object-crystal.jpg',
+    image: '',
     category: 'object'
   },
   {
     id: 'object-3',
     title: 'Old Book',
-    image: '/images/elements/object-book.jpg',
+    image: '',
     category: 'object'
   },
   {
     id: 'object-4',
     title: 'Mysterious Key',
-    image: '/images/elements/object-key.jpg',
+    image: '',
     category: 'object'
   },
   {
     id: 'object-5',
     title: 'Strange Device',
-    image: '/images/elements/object-device.jpg',
+    image: '',
     category: 'object'
   },
   {
     id: 'object-6',
     title: 'Letter',
-    image: '/images/elements/object-letter.jpg',
+    image: '',
     category: 'object'
   },
 
@@ -81,37 +81,37 @@ export const storyElements: StoryElement[] = [
   {
     id: 'terrain-1',
     title: 'Forest',
-    image: '/images/elements/terrain-forest.jpg',
+    image: '',
     category: 'terrain'
   },
   {
     id: 'terrain-2',
     title: 'Mountain',
-    image: '/images/elements/terrain-mountain.jpg',
+    image: '',
     category: 'terrain'
   },
   {
     id: 'terrain-3',
     title: 'Ocean',
-    image: '/images/elements/terrain-ocean.jpg',
+    image: '',
     category: 'terrain'
   },
   {
     id: 'terrain-4',
     title: 'Desert',
-    image: '/images/elements/terrain-desert.jpg',
+    image: '',
     category: 'terrain'
   },
   {
     id: 'terrain-5',
     title: 'City',
-    image: '/images/elements/terrain-city.jpg',
+    image: '',
     category: 'terrain'
   },
   {
     id: 'terrain-6',
     title: 'Cave',
-    image: '/images/elements/terrain-cave.jpg',
+    image: '',
     category: 'terrain'
   },
 
@@ -119,37 +119,37 @@ export const storyElements: StoryElement[] = [
   {
     id: 'mood-1',
     title: 'Mysterious',
-    image: '/images/elements/mood-mysterious.jpg',
+    image: '',
     category: 'mood'
   },
   {
     id: 'mood-2',
     title: 'Hopeful',
-    image: '/images/elements/mood-hopeful.jpg',
+    image: '',
     category: 'mood'
   },
   {
     id: 'mood-3',
     title: 'Tense',
-    image: '/images/elements/mood-tense.jpg',
+    image: '',
     category: 'mood'
   },
   {
     id: 'mood-4',
     title: 'Melancholic',
-    image: '/images/elements/mood-melancholic.jpg',
+    image: '',
     category: 'mood'
   },
   {
     id: 'mood-5',
     title: 'Joyful',
-    image: '/images/elements/mood-joyful.jpg',
+    image: '',
     category: 'mood'
   },
   {
     id: 'mood-6',
     title: 'Eerie',
-    image: '/images/elements/mood-eerie.jpg',
+    image: '',
     category: 'mood'
   },
 ]; 

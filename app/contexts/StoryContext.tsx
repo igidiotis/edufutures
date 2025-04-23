@@ -6,7 +6,7 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 export type StoryElement = {
   id: string;
   title: string;
-  image: string;
+  image?: string;
   category: 'arc' | 'object' | 'terrain' | 'mood';
 };
 
