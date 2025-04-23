@@ -38,7 +38,9 @@ export async function POST(request: Request) {
 - Environment: ${terrain.title} - ${terrain.description}
 - Emotional context: ${mood.title} - ${mood.description}
 
-Keep the opener concise but evocative, focusing on setting the scene and tone for the story. Do not resolve the story, just set up an intriguing beginning.`;
+Important: Use simple, clear language that would be easily understood by non-native English speakers. Avoid metaphors, flowery descriptions, or poetic language. The writing should be straightforward while still setting up an interesting beginning for the story.
+
+Keep the opener concise, focusing on setting the scene and tone. Do not resolve the story, just create an intriguing start.`;
 
     console.log('Sending prompt to Gemini...');
     const result = await model.generateContent(prompt);
