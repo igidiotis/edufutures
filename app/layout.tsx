@@ -1,15 +1,10 @@
 import './globals.css';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import { StoryProvider } from './contexts/StoryContext';
+import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
-  title: 'Story Research App',
-  description: 'Interactive storytelling research application',
-};
-
+// Remove metadata export entirely to avoid any issues
 export default function RootLayout({
   children,
 }: {
@@ -17,6 +12,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <title>Story Research App</title>
+        <meta name="description" content="Interactive storytelling research application" />
+      </head>
       <body className={inter.className}>
         <StoryProvider>
           {children}

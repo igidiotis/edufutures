@@ -10,11 +10,13 @@ const nextConfig = {
         hostname: '**',
       },
     ],
+    unoptimized: true, // Disable image optimization to avoid metadata issues
   },
-  // Build the app from the app directory
+  // Simplify configuration
   experimental: {
-    // No experimental features needed at this time
+    // Disable metadata generation for now
+    typedRoutes: false,
   },
 };
 
-module.exports = nextConfig; 
+export default nextConfig; 
