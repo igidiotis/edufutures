@@ -15,13 +15,15 @@ interface ResearchState {
   story: string;
   // AI-generated story starter
   aiStoryStarter: string;
+  // Loading state for story generation
+  isGenerating: boolean;
   
   // Actions
   selectElement: (category: string, element: ElementType) => void;
   setCurrentStep: (step: number) => void;
   setStory: (story: string) => void;
   setAiStoryStarter: (starter: string) => void;
-  generateStoryStarter: () => void;
+  generateStoryStarter: () => Promise<void>;
   resetSelections: () => void;
 }
 
@@ -35,6 +37,7 @@ export const useResearchStore = create<ResearchState>((set, get) => ({
   currentStep: 1,
   story: '',
   aiStoryStarter: '',
+  isGenerating: false,
   
   selectElement: (category, element) => set((state) => ({
     selectedElements: {
@@ -54,6 +57,8 @@ export const useResearchStore = create<ResearchState>((set, get) => ({
   
   generateStoryStarter: async () => {
     const { selectedElements } = get();
+    
+    set({ isGenerating: true });
     
     try {
       const response = await fetch('/api/generate', {
@@ -76,10 +81,12 @@ export const useResearchStore = create<ResearchState>((set, get) => ({
       const data = await response.json();
       set({ 
         aiStoryStarter: data.text,
-        story: data.text // Set the story text to the generated opener
+        story: data.text, // Set the story text to the generated opener
+        isGenerating: false
       });
     } catch (error) {
       console.error('Error generating story:', error);
+      set({ isGenerating: false });
       // You might want to add error handling here
     }
   },
@@ -93,6 +100,7 @@ export const useResearchStore = create<ResearchState>((set, get) => ({
     },
     story: '',
     aiStoryStarter: '',
-    currentStep: 1
+    currentStep: 1,
+    isGenerating: false
   })
 })); 
