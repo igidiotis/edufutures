@@ -39,10 +39,16 @@ export default function SelectionCard({ category }: SelectionCardProps) {
             <button
               key={element.id}
               onClick={() => selectElement(category.id, element)}
-              className={`w-full text-left p-3 rounded-lg transition-all duration-200 ${
+              className={`w-full text-left p-3 rounded-lg transition-all duration-200 min-h-[100px] ${
                 isSelected(element)
-                  ? 'bg-blue-100 border-2 border-blue-500 text-blue-800'
-                  : 'bg-gray-50 hover:bg-gray-100 border-2 border-transparent'
+                  ? 'bg-gradient-to-r from-blue-50 to-blue-100 border-2 border-blue-500 text-blue-800'
+                  : category.id === 'arc' 
+                    ? 'bg-gradient-to-r from-purple-50 to-indigo-50 hover:from-purple-100 hover:to-indigo-100 border-2 border-transparent'
+                    : category.id === 'object'
+                    ? 'bg-gradient-to-r from-blue-50 to-cyan-50 hover:from-blue-100 hover:to-cyan-100 border-2 border-transparent'
+                    : category.id === 'terrain'
+                    ? 'bg-gradient-to-r from-emerald-50 to-teal-50 hover:from-emerald-100 hover:to-teal-100 border-2 border-transparent'
+                    : 'bg-gradient-to-r from-amber-50 to-orange-50 hover:from-amber-100 hover:to-orange-100 border-2 border-transparent'
               }`}
             >
               <div className="font-medium">{element.title}</div>
