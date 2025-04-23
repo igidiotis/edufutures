@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     // Initialize Gemini API
     console.log('Initializing Gemini API...');
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
     const prompt = `Write a 2-3 sentence story opener for a speculative fiction story about the future of education. The story should incorporate these elements:
 - Future trajectory: ${arc.title} - ${arc.description}
