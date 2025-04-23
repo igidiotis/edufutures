@@ -5,9 +5,28 @@ import { StoryElement } from '../contexts/StoryContext';
 const getApiKey = () => {
   const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
   if (!apiKey) {
-    throw new Error('Missing Gemini API key');
+    console.warn('Missing Gemini API key - using placeholder response');
+    return null;
   }
   return apiKey;
+};
+
+// Placeholder response when no API key is available
+const getPlaceholderStory = (elements: {
+  arc?: StoryElement;
+  object?: StoryElement;
+  terrain?: StoryElement;
+  mood?: StoryElement;
+}): string => {
+  const arc = elements.arc?.title || 'Journey';
+  const object = elements.object?.title || 'Map';
+  const terrain = elements.terrain?.title || 'Forest';
+  const mood = elements.mood?.title || 'Mysterious';
+  
+  return `The ${mood.toLowerCase()} atmosphere surrounded me as I ventured into the dense ${terrain.toLowerCase()}. 
+  This ${arc.toLowerCase()} had begun unexpectedly when I discovered the ancient ${object.toLowerCase()} hidden in my grandfather's attic.
+  As I continued deeper into the unknown territory, the ${object.toLowerCase()} seemed to glow faintly, responding to something ahead.
+  What secrets would I uncover? The path forward was uncertain, but I knew this was just the beginning of something extraordinary...`;
 };
 
 export const generateStoryBeginning = async (elements: {
@@ -18,6 +37,12 @@ export const generateStoryBeginning = async (elements: {
 }): Promise<string> => {
   try {
     const apiKey = getApiKey();
+    
+    // If no API key is available, return a placeholder story
+    if (!apiKey) {
+      return getPlaceholderStory(elements);
+    }
+    
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
 
@@ -49,6 +74,6 @@ export const generateStoryBeginning = async (elements: {
     return text;
   } catch (error) {
     console.error('Error generating story:', error);
-    return 'We encountered an error generating your story. Please try again.';
+    return getPlaceholderStory(elements);
   }
 }; 

@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import { StoryElement } from '../contexts/StoryContext';
 
@@ -10,6 +11,13 @@ type StoryElementCardProps = {
 };
 
 export default function StoryElementCard({ element, isSelected, onSelect }: StoryElementCardProps) {
+  const [imgError, setImgError] = useState(false);
+
+  // Use a placeholder image or a fallback color when image is missing
+  const handleImageError = () => {
+    setImgError(true);
+  };
+
   return (
     <div 
       className={`
@@ -21,14 +29,21 @@ export default function StoryElementCard({ element, isSelected, onSelect }: Stor
       `}
       onClick={() => onSelect(element)}
     >
-      <div className="relative w-full h-40 mb-3 overflow-hidden rounded-md">
-        <Image 
-          src={element.image} 
-          alt={element.title}
-          className="object-cover" 
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
+      <div className="relative w-full h-40 mb-3 overflow-hidden rounded-md bg-gray-200">
+        {imgError ? (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-200 text-gray-500">
+            <span className="text-lg font-medium">{element.title}</span>
+          </div>
+        ) : (
+          <Image 
+            src={element.image || '/images/placeholder.jpg'} 
+            alt={element.title}
+            className="object-cover" 
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            onError={handleImageError}
+          />
+        )}
       </div>
       <h3 className="text-lg font-medium text-center">{element.title}</h3>
       

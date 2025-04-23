@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "outputDirectory": ".next",
+  "regions": ["auto"],
+  "env": {
+    "NEXT_PUBLIC_GEMINI_API_KEY": "you-need-to-add-your-own-key-here"
+  },
+  "github": {
+    "silent": true
+  }
+} 
