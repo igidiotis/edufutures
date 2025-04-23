@@ -52,23 +52,35 @@ export const useResearchStore = create<ResearchState>((set, get) => ({
     story: starter // Also set the main story to include the starter
   }),
   
-  generateStoryStarter: () => {
+  generateStoryStarter: async () => {
     const { selectedElements } = get();
     
-    // For now, create a simple story starter based on the selected elements
-    // This will be replaced with an actual AI API call later
-    if (selectedElements.arc && selectedElements.object && selectedElements.terrain && selectedElements.mood) {
-      const arcTitle = selectedElements.arc.title;
-      const objectTitle = selectedElements.object.title;
-      const terrainTitle = selectedElements.terrain.title;
-      const moodTitle = selectedElements.mood.title;
-      
-      const starter = `In a ${arcTitle} future of education, the ${objectTitle} has become essential within the ${terrainTitle}. As you engage with this emerging reality, you feel a sense of ${moodTitle}...`;
-      
-      set({ 
-        aiStoryStarter: starter,
-        story: starter
+    try {
+      const response = await fetch('/api/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          arc: selectedElements.arc,
+          object: selectedElements.object,
+          terrain: selectedElements.terrain,
+          mood: selectedElements.mood,
+        }),
       });
+
+      if (!response.ok) {
+        throw new Error('Failed to generate story');
+      }
+
+      const data = await response.json();
+      set({ 
+        aiStoryStarter: data.text,
+        story: data.text // Set the story text to the generated opener
+      });
+    } catch (error) {
+      console.error('Error generating story:', error);
+      // You might want to add error handling here
     }
   },
   
