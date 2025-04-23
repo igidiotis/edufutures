@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { ElementType } from '../data/researchData';
+import { ElementType } from '../types/research';
 
 interface ResearchState {
   // Selected elements for each category

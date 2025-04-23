@@ -1,8 +1,29 @@
 'use client';
 
 import React from 'react';
+import { useResearchStore } from '../store/researchStore';
+import ProgressSteps from './ProgressSteps';
+import Step1Selection from './Step1Selection';
+import Step2Writing from './Step2Writing';
+import Step3Submit from './Step3Submit';
 
 export default function ResearchApp() {
+  const { currentStep } = useResearchStore();
+  
+  // Render the appropriate step component based on the current step
+  const renderStep = () => {
+    switch (currentStep) {
+      case 1:
+        return <Step1Selection />;
+      case 2:
+        return <Step2Writing />;
+      case 3:
+        return <Step3Submit />;
+      default:
+        return <Step1Selection />;
+    }
+  };
+  
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
       <header className="bg-white border-b border-gray-200">
@@ -15,18 +36,10 @@ export default function ResearchApp() {
         </div>
       </header>
       
-      <main className="max-w-6xl mx-auto px-4 py-12">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Future of Digital Education
-          </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Welcome to EduFutures Research. We are building a platform to explore speculative scenarios about the future of digital education.
-          </p>
-          <div className="mt-8 inline-block px-6 py-3 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 transition-colors">
-            Coming Soon
-          </div>
-        </div>
+      <ProgressSteps />
+      
+      <main className="max-w-6xl mx-auto px-4 py-8">
+        {renderStep()}
       </main>
       
       <footer className="bg-white border-t border-gray-200 mt-12">

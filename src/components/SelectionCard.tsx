@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { CategoryData, ElementType } from '../data/researchData';
+import { CategoryData, ElementType } from '../types/research';
 import { useResearchStore } from '../store/researchStore';
 
 interface SelectionCardProps {

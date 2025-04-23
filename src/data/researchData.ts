@@ -1,15 +1,10 @@
+import { CategoryData } from '../types/research';
+
 // Data for the research cards with elements for each category
 export interface ElementType {
   id: string;
   title: string;
   description: string;
-}
-
-export interface CategoryData {
-  id: string;
-  title: string;
-  description: string;
-  elements: ElementType[];
 }
 
 export const researchData: CategoryData[] = [
