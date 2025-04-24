@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import { supabase } from '@/utils/supabase';
+import { supabaseAdmin } from '@/utils/supabaseAdmin';
 
 // Initialize Resend with API key
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -49,10 +49,10 @@ export async function POST(request: Request) {
 
     let responseData: ResponseData = { success: true };
     
-    // Store submission in Supabase
+    // Store submission in Supabase using admin client
     try {
       console.log('Storing submission in Supabase...');
-      const { data, error } = await supabase
+      const { data, error } = await supabaseAdmin
         .from('submissions')
         .insert({
           occupation,
@@ -92,7 +92,7 @@ export async function POST(request: Request) {
       try {
         console.log('Sending confirmation email to:', email);
         const { data, error } = await resend.emails.send({
-          from: 'EduFutures Research <gidiotis@kth.se>', // Update with your domain
+          from: 'EduFutures Research <gidiotis@kth.se>', 
           to: [email],
           bcc: process.env.ADMIN_EMAIL || '', // Optional: Set this in .env
           subject: 'Thank you for your EduFutures submission',
