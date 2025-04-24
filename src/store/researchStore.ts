@@ -1,6 +1,28 @@
 import { create } from 'zustand';
 import { ElementType } from '../types/research';
 
+interface FormData {
+  // Demographics
+  occupation: string;
+  subjectField: string;
+  country: string;
+  email: string;
+  
+  // Reflections
+  scenarioCreationExperience: string;
+  educationalInsights: string;
+  comparativeAnalysis: string;
+  metaReflective: string;
+  challengeRating: string;
+  researchImprovement: string;
+  additionalComments: string;
+}
+
+interface FormState {
+  success: boolean;
+  message: string;
+}
+
 interface ResearchState {
   // Selected elements for each category
   selectedElements: {
@@ -20,6 +42,11 @@ interface ResearchState {
   // Error message
   error: string | null;
   
+  // Form data
+  formData: FormData;
+  isSubmitting: boolean;
+  formState: FormState | null;
+  
   // Actions
   selectElement: (category: string, element: ElementType) => void;
   setCurrentStep: (step: number) => void;
@@ -28,6 +55,11 @@ interface ResearchState {
   generateStoryStarter: () => Promise<void>;
   resetSelections: () => void;
   clearError: () => void;
+  
+  // Form actions
+  updateFormField: (field: keyof FormData, value: string) => void;
+  submitForm: () => Promise<void>;
+  resetForm: () => void;
 }
 
 export const useResearchStore = create<ResearchState>((set, get) => ({
@@ -42,6 +74,23 @@ export const useResearchStore = create<ResearchState>((set, get) => ({
   aiStoryStarter: '',
   isGenerating: false,
   error: null,
+  
+  // Initialize form data
+  formData: {
+    occupation: '',
+    subjectField: '',
+    country: '',
+    email: '',
+    scenarioCreationExperience: '',
+    educationalInsights: '',
+    comparativeAnalysis: '',
+    metaReflective: '',
+    challengeRating: '4',
+    researchImprovement: '',
+    additionalComments: ''
+  },
+  isSubmitting: false,
+  formState: null,
   
   selectElement: (category, element) => set((state) => ({
     selectedElements: {
@@ -111,6 +160,91 @@ export const useResearchStore = create<ResearchState>((set, get) => ({
     aiStoryStarter: '',
     currentStep: 1,
     isGenerating: false,
-    error: null
+    error: null,
+    // Also reset form data and form state when starting over
+    formData: {
+      occupation: '',
+      subjectField: '',
+      country: '',
+      email: '',
+      scenarioCreationExperience: '',
+      educationalInsights: '',
+      comparativeAnalysis: '',
+      metaReflective: '',
+      challengeRating: '4',
+      researchImprovement: '',
+      additionalComments: ''
+    },
+    isSubmitting: false,
+    formState: null
+  }),
+  
+  // Form actions
+  updateFormField: (field, value) => set((state) => ({
+    formData: {
+      ...state.formData,
+      [field]: value
+    }
+  })),
+  
+  submitForm: async () => {
+    const { formData, story } = get();
+    
+    set({ isSubmitting: true, formState: null });
+    
+    try {
+      const response = await fetch('/api/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          story,
+        }),
+      });
+
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit form');
+      }
+
+      set({ 
+        isSubmitting: false, 
+        formState: { 
+          success: true, 
+          message: 'Your submission has been received. Thank you for participating!' 
+        } 
+      });
+      
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      set({ 
+        isSubmitting: false, 
+        formState: { 
+          success: false, 
+          message: error instanceof Error ? error.message : 'Failed to submit form'
+        } 
+      });
+    }
+  },
+  
+  resetForm: () => set({
+    formData: {
+      occupation: '',
+      subjectField: '',
+      country: '',
+      email: '',
+      scenarioCreationExperience: '',
+      educationalInsights: '',
+      comparativeAnalysis: '',
+      metaReflective: '',
+      challengeRating: '4',
+      researchImprovement: '',
+      additionalComments: ''
+    },
+    isSubmitting: false,
+    formState: null
   })
 })); 
