@@ -1,14 +1,30 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useResearchStore } from '../store/researchStore';
 import ProgressSteps from './ProgressSteps';
 import Step1Selection from './Step1Selection';
 import Step2Writing from './Step2Writing';
 import Step3Submit from './Step3Submit';
+import ConsentModal from './ConsentModal';
+import { useRouter } from 'next/navigation';
 
 export default function ResearchApp() {
-  const { currentStep } = useResearchStore();
+  const { currentStep, hasConsent, setHasConsent } = useResearchStore();
+  const router = useRouter();
+  
+  // Show the modal if there's no consent
+  const showConsentModal = !hasConsent;
+  
+  const handleAcceptConsent = () => {
+    setHasConsent(true);
+  };
+  
+  const handleDeclineConsent = () => {
+    // Redirect to another page or show a message that they can't use the app
+    // For now, we'll just redirect to an external site
+    window.location.href = 'https://kth.se';
+  };
   
   // Render the appropriate step component based on the current step
   const renderStep = () => {
@@ -35,6 +51,12 @@ export default function ResearchApp() {
           </div>
         </div>
       </header>
+      
+      <ConsentModal 
+        isOpen={showConsentModal}
+        onAccept={handleAcceptConsent}
+        onDecline={handleDeclineConsent}
+      />
       
       <ProgressSteps />
       
