@@ -6,8 +6,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | EduFutures Research',
-    default: 'EduFutures Research - Future of Digital Education',
+    template: '%s | Imagining Education Futures',
+    default: 'Imagining Education Futures',
   },
   description: "A research tool for exploring speculative scenarios about the future of digital education",
 };

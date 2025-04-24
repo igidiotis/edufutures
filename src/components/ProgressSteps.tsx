@@ -9,7 +9,7 @@ export default function ProgressSteps() {
   const steps = [
     { id: 1, name: 'Selection', description: 'Choose elements' },
     { id: 2, name: 'Writing', description: 'Create your story' },
-    { id: 3, name: 'Submit', description: 'Share your research' },
+    { id: 3, name: 'Submit', description: 'Share your story' },
   ];
   
   return (
