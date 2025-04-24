@@ -90,87 +90,85 @@ export async function POST(request: Request) {
     // Send email if email is provided
     if (email) {
       try {
-        console.log('Sending confirmation email to:', email);
-        const { data, error } = await resend.emails.send({
-          from: 'EduFutures Research <gidiotis@kth.se>', 
-          to: [email],
-          bcc: process.env.ADMIN_EMAIL || '', // Optional: Set this in .env
-          subject: 'Thank you for your EduFutures submission',
-          html: `
-            <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
-              <h1 style="color: #4B5563; margin-bottom: 20px; font-size: 24px;">Thank You for Your Submission!</h1>
-              <p style="margin-bottom: 15px; line-height: 1.5;">We appreciate your contribution to the EduFutures Research project.</p>
-              
-              <div style="background-color: #F3F4F6; padding: 20px; border-radius: 8px; margin: 25px 0;">
-                <h2 style="color: #4B5563; font-size: 18px; margin-bottom: 15px;">Your Speculative Scenario</h2>
-                <div style="line-height: 1.6; white-space: pre-wrap;">${story.replace(/\n/g, '<br>')}</div>
-              </div>
-              
-              <h2 style="color: #4B5563; font-size: 18px; margin: 20px 0 15px;">Your Reflections</h2>
-              
-              <div style="margin-bottom: 25px;">
-                <h3 style="color: #4B5563; font-size: 16px; margin-bottom: 5px;">Scenario Creation Experience</h3>
-                <p style="color: #6B7280; margin-bottom: 10px; line-height: 1.5;">${scenarioCreationExperience}</p>
-              </div>
-              
-              <div style="margin-bottom: 25px;">
-                <h3 style="color: #4B5563; font-size: 16px; margin-bottom: 5px;">Educational Insights</h3>
-                <p style="color: #6B7280; margin-bottom: 10px; line-height: 1.5;">${educationalInsights}</p>
-              </div>
-              
-              <div style="margin-bottom: 25px;">
-                <h3 style="color: #4B5563; font-size: 16px; margin-bottom: 5px;">Comparative Analysis</h3>
-                <p style="color: #6B7280; margin-bottom: 10px; line-height: 1.5;">${comparativeAnalysis}</p>
-              </div>
-              
-              <div style="margin-bottom: 25px;">
-                <h3 style="color: #4B5563; font-size: 16px; margin-bottom: 5px;">Meta-Reflective</h3>
-                <p style="color: #6B7280; margin-bottom: 10px; line-height: 1.5;">${metaReflective}</p>
-              </div>
-              
-              <div style="margin-bottom: 25px;">
-                <h3 style="color: #4B5563; font-size: 16px; margin-bottom: 5px;">Challenge Rating</h3>
-                <p style="color: #6B7280; margin-bottom: 10px; line-height: 1.5;">${challengeRating}/7</p>
-              </div>
-              
-              <div style="margin-bottom: 25px;">
-                <h3 style="color: #4B5563; font-size: 16px; margin-bottom: 5px;">Research Improvement</h3>
-                <p style="color: #6B7280; margin-bottom: 10px; line-height: 1.5;">${researchImprovement}</p>
-              </div>
-              
-              ${additionalComments ? `
-              <div style="margin-bottom: 25px;">
-                <h3 style="color: #4B5563; font-size: 16px; margin-bottom: 5px;">Additional Comments</h3>
-                <p style="color: #6B7280; margin-bottom: 10px; line-height: 1.5;">${additionalComments}</p>
-              </div>
-              ` : ''}
-              
-              <hr style="border: none; border-top: 1px solid #E5E7EB; margin: 30px 0;" />
-              
-              <p style="color: #6B7280; font-size: 14px;">Thank you again for participating in our research project. If you have any questions, please don't hesitate to contact us.</p>
-              <p style="color: #6B7280; font-size: 14px;">- The EduFutures Research Team</p>
+        console.log('Attempting to send email to:', email);
+        console.log('Using Resend API key (first 4 chars):', process.env.RESEND_API_KEY?.substring(0, 4));
+        
+        // Email HTML content
+        const emailHtml = `
+          <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333; background-color: #f8f9fa; border-radius: 10px;">
+            <div style="text-align: center; margin-bottom: 30px;">
+              <h1 style="color: #3b82f6; margin-bottom: 10px; font-size: 28px;">Thank You for Your Contribution!</h1>
+              <div style="width: 80px; height: 4px; background: linear-gradient(90deg, #3b82f6, #8b5cf6); margin: 0 auto 20px;"></div>
+              <p style="margin-bottom: 15px; line-height: 1.6; font-size: 17px;">
+                Dear ${occupation} from ${country},
+              </p>
+              <p style="margin-bottom: 25px; line-height: 1.6; font-size: 16px;">
+                We greatly appreciate your thoughtful contribution to the EduFutures Research project. 
+                Your insights will help shape our understanding of future educational landscapes and inform innovative approaches to learning and futures thinking.
+              </p>
             </div>
-          `,
+            
+            <div style="background-color: #ffffff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin: 25px 0;">
+              <h2 style="color: #4B5563; font-size: 22px; margin-bottom: 15px; border-left: 4px solid #3b82f6; padding-left: 10px;">What Happens Next?</h2>
+              <p style="color: #4B5563; margin-bottom: 15px; line-height: 1.6;">
+                Your contribution will be analyzed alongside other submissions to identify patterns, 
+                innovative approaches, and emerging themes in educational futures. This research will help us:
+              </p>
+              <ul style="color: #4B5563; margin-bottom: 20px; line-height: 1.6; padding-left: 20px;">
+                <li style="margin-bottom: 8px;">Develop frameworks for understanding possible educational futures</li>
+                <li style="margin-bottom: 8px;">Identify key tensions and opportunities in educational technology</li>
+                <li style="margin-bottom: 8px;">Create resources to help educators prepare for upcoming challenges</li>
+                <li style="margin-bottom: 8px;">Inform policy discussions around the future of learning</li>
+              </ul>
+              <p style="color: #4B5563; line-height: 1.6;">
+                We may reach out for additional insights or to invite you to participate in follow-up
+                studies if you've expressed interest in further participation.
+              </p>
+            </div>
+            
+            <hr style="border: none; border-top: 1px solid #E5E7EB; margin: 30px 0;" />
+            
+            <div style="text-align: center;">
+              <p style="color: #6B7280; font-size: 15px; margin-bottom: 10px; line-height: 1.5;">
+                Thank you again for participating in our research project. Your contribution is invaluable!
+              </p>
+              <p style="color: #6B7280; font-size: 15px; line-height: 1.5;">
+                If you have any questions, please don't hesitate to contact us at <a href="mailto:gidiotis@kth.se" style="color: #3b82f6; text-decoration: none;">gidiotis@kth.se</a>
+              </p>
+              <p style="color: #6B7280; font-size: 15px; margin-top: 15px; line-height: 1.5;">
+                - The EduFutures Research Team
+              </p>
+            </div>
+          </div>
+        `;
+        
+        // Using Resend as per their documentation
+        const result = await resend.emails.send({
+          from: 'EduFutures Research <onboarding@resend.dev>', // Use Resend's default domain initially
+          to: [email],
+          subject: 'Thank you for your EduFutures research contribution',
+          html: emailHtml,
         });
-
-        if (error) {
-          console.error('Error sending email:', error);
-          // We still consider the submission successful even if email fails
+        
+        console.log('Resend API response:', result);
+        
+        if (result.error) {
+          console.error('Error from Resend API:', result.error);
           responseData = { 
             ...responseData, 
             emailSent: false, 
-            emailError: error.message 
+            emailError: result.error.message 
           };
         } else {
-          console.log('Email sent successfully with ID:', data?.id);
+          console.log('Email sent successfully with ID:', result.data?.id);
           responseData = { 
             ...responseData, 
             emailSent: true, 
-            messageId: data?.id 
+            messageId: result.data?.id 
           };
         }
       } catch (emailError) {
-        console.error('Email error:', emailError);
+        console.error('Exception during email sending:', emailError);
         responseData = { 
           ...responseData, 
           emailSent: false, 
