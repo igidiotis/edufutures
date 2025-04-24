@@ -97,7 +97,7 @@ export async function POST(request: Request) {
         const emailHtml = `
           <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333; background-color: #f8f9fa; border-radius: 10px;">
             <div style="text-align: center; margin-bottom: 30px;">
-              <h1 style="color: #3b82f6; margin-bottom: 10px; font-size: 28px;">Thank You for Your Contribution!</h1>
+              <h1 style="color: #3b82f6; margin-bottom: 10px; font-size: 28px;">Thank you for sharing your story!</h1>
               <div style="width: 80px; height: 4px; background: linear-gradient(90deg, #3b82f6, #8b5cf6); margin: 0 auto 20px;"></div>
               <p style="margin-bottom: 15px; line-height: 1.6; font-size: 17px;">
                 Dear ${occupation} from ${country},
@@ -106,6 +106,11 @@ export async function POST(request: Request) {
                 We greatly appreciate your thoughtful contribution to the EduFutures Research project. 
                 Your insights will help shape our understanding of future educational landscapes and inform innovative approaches to learning and futures thinking.
               </p>
+            </div>
+
+            <div style="background-color: #ffffff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin: 25px 0;">
+              <h2 style="color: #4B5563; font-size: 22px; margin-bottom: 15px; border-left: 4px solid #3b82f6; padding-left: 10px;">Your Speculative Scenario</h2>
+              <div style="line-height: 1.6; white-space: pre-wrap; background-color: #f9fafb; padding: 15px; border-radius: 6px; font-style: italic;">${story.replace(/\n/g, '<br>')}</div>
             </div>
             
             <div style="background-color: #ffffff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin: 25px 0;">
@@ -133,10 +138,10 @@ export async function POST(request: Request) {
                 Thank you again for participating in our research project. Your contribution is invaluable!
               </p>
               <p style="color: #6B7280; font-size: 15px; line-height: 1.5;">
-                If you have any questions, please don't hesitate to contact us at <a href="mailto:gidiotis@kth.se" style="color: #3b82f6; text-decoration: none;">gidiotis@kth.se</a>
+                If you have any questions, please don't hesitate to contact me at <a href="mailto:gidiotis@kth.se" style="color: #3b82f6; text-decoration: none;">gidiotis@kth.se</a>
               </p>
               <p style="color: #6B7280; font-size: 15px; margin-top: 15px; line-height: 1.5;">
-                - The EduFutures Research Team
+                - EduFutures Research project
               </p>
             </div>
           </div>
@@ -146,7 +151,7 @@ export async function POST(request: Request) {
         const result = await resend.emails.send({
           from: 'EduFutures Research <onboarding@resend.dev>', // Use Resend's default domain initially
           to: [email],
-          subject: 'Thank you for your EduFutures research contribution',
+          subject: 'Thank you for sharing you future scenario!',
           html: emailHtml,
         });
         
